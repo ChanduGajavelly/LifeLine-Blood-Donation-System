@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blood Donation System - Make a difference in your community by donating blood.">
+    <title>Blood Donation System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/home.css') }}" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <div id="navbar"></div>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="container text-center">
+            <h1>Welcome to the Blood Donation System</h1>
+            <p>Your blood donation can save lives and make a difference in your community.</p>
+            <div class="cta-buttons">
+                <a href="/donor-registration" class="btn btn-light">Donor Registration/Login</a>
+                <a href="/admin-login" class="btn btn-light">Admin Login</a>
+                <a href="/blood-request" class="btn btn-light">Blood Request</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Information Section -->
+    <section class="info-section">
+        <div class="container">
+            <h2>Why Donate Blood?</h2>
+            <p>
+                Every 2 seconds, someone in the world needs blood. Donating blood is a simple and selfless act that can save lives. 
+                From accident victims to cancer patients and those undergoing surgery, the demand for blood is constant, and your contribution is invaluable.
+            </p>
+            <p>
+                By donating blood, you help maintain a steady supply in our hospitals and clinics. One donation can save up to three lives. 
+                Take a moment to make a lasting impact by becoming a donor today.
+            </p>
+            <h2>Who Can Donate?</h2>
+            <p>
+                If you are healthy, at least 18 years old, and weigh 50 kg or more, you are eligible to donate blood. Please join us in our mission to save lives and contribute to the well-being of others.
+            </p>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+</body>
+</html>

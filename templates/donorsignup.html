@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donor SignUp</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tailwind CSS (CDN) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/donorsignup.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div id="navbar"></div>
+
+    <div class="container mt-5">
+        <!-- Search Form -->
+        <div class="form-container">
+            <h3 class="text-center form-title">Search Donor Details</h3>
+            <form id="searchForm" action="/search" method="POST" class="needs-validation" novalidate>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter donor's name" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid name.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number:</label>
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter 10-digit phone number" required pattern="[0-9]{10}">
+                    <div class="invalid-feedback">
+                        Please provide a valid 10-digit phone number.
+                    </div>
+                </div>
+                <button type="submit" class="btn submit-btn w-100">Search</button>
+            </form>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loading" class="text-center mt-3" style="display: none;">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results" class="mt-4" aria-live="polite">
+            {% if donor %}
+            <div class="results-card">
+                <h3 class="text-center">Donor Details</h3>
+                <table class="table table-bordered table-striped mt-3">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Name</th>
+                            <th>Weight (kg)</th>
+                            <th>Age (years)</th>
+                            <th>Gender</th>
+                            <th>Blood Group</th>
+                            <th>Phone</th>
+                            <th>Pincode</th>
+                            <th>Chronic Disease</th>
+                            <th>Latitude</th>
+                            <th>Longitude</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ donor['name'] }}</td>
+                            <td>{{ donor['weight'] }}</td>
+                            <td>{{ donor['age'] }}</td>
+                            <td>{{ donor['gender'] }}</td>
+                            <td>{{ donor['blood_group'] }}</td>
+                            <td>{{ donor['phone'] }}</td>
+                            <td>{{ donor['pincode'] }}</td>
+                            <td>{{ donor['chronic_disease'] }}</td>
+                            <td>{{ donor['latitude'] }}</td>
+                            <td>{{ donor['longitude'] }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            {% elif message %}
+            <div class="alert alert-warning mt-3" role="alert">
+                {{ message }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Separate JS Files -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/donorsignup.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+</body>
+</html>

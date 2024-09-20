@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donor Registration Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/donorregistration.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div id="navbar"></div>
+
+    <div class="form-container">
+        <h3 class="text-center">Blood Donor Registration</h3>
+        <form id="donorForm" action="/submit" method="POST">
+
+            <!-- Form Fields -->
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" required aria-label="Enter your name" aria-required="true">
+            </div>
+            <div class="form-group">
+                <label for="weight">Weight (in kg):</label>
+                <input type="number" class="form-control" id="weight" name="weight" min="50" required aria-label="Enter your weight in kilograms" aria-required="true" aria-describedby="weight-help">
+                <small id="weight-help" class="form-text text-muted">Minimum weight required is 50 kg.</small>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" class="form-control" id="age" name="age" min="18" required aria-label="Enter your age" aria-required="true" aria-describedby="age-help">
+                <small id="age-help" class="form-text text-muted">Minimum age required is 18 years.</small>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select class="form-control" id="gender" name="gender" required aria-label="Select your gender" aria-required="true">
+                    <option value="">Select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="bloodGroup">Blood Group:</label>
+                <select class="form-control" id="bloodGroup" name="bloodGroup" required aria-label="Select your blood group" aria-required="true">
+                    <option value="">Select</option>
+                    <option value="A+">A+</option>
+                    <option value="O+">O+</option>
+                    <option value="B+">B+</option>
+                    <option value="AB+">AB+</option>
+                    <option value="A-">A-</option>
+                    <option value="O-">O-</option>
+                    <option value="B-">B-</option>
+                    <option value="AB-">AB-</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{10}" required aria-label="Enter your phone number" aria-required="true" aria-describedby="phone-help">
+                <small id="phone-help" class="form-text text-muted">Enter a valid 10-digit phone number.</small>
+            </div>
+            <div class="form-group">
+                <label for="pincode">Pin Code:</label>
+                <input type="text" class="form-control" id="pincode" name="pincode" required minlength="5" maxlength="6" aria-label="Enter your area pin code" aria-required="true">
+            </div>
+            <div class="form-group">
+                <label for="chronicDisease">Do you have any chronic disease?</label>
+                <select class="form-control" id="chronicDisease" name="chronicDisease" required aria-label="Select if you have any chronic disease" aria-required="true">
+                    <option value="">Select</option>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+            <!-- Latitude and Longitude Fields -->
+            <div class="form-group">
+                <label for="latitude">Latitude (Auto-detected):</label>
+                <input type="text" class="form-control" id="latitude" name="latitude" readonly required aria-label="Auto-detected latitude">
+                <small class="form-text text-muted">This field will be automatically populated.</small>
+            </div>
+            <div class="form-group">
+                <label for="longitude">Longitude (Auto-detected):</label>
+                <input type="text" class="form-control" id="longitude" name="longitude" readonly required aria-label="Auto-detected longitude">
+                <small class="form-text text-muted">This field will be automatically populated.</small>
+            </div>
+            <button type="submit" class="btn btn-primary submit-btn" aria-label="Submit the form">Submit</button>
+        </form>
+        <div class="signin-text">
+            <p>Already have an account? <a href="/donor-signup">Sign in</a></p>
+        </div>
+    </div>
+
+    <!-- Separate JS File -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/donorregistration.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+    <script>
+        // Geolocation to auto-fill latitude and longitude separately
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                document.getElementById('latitude').value = position.coords.latitude;
+                document.getElementById('longitude').value = position.coords.longitude;
+            });
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    </script>
+</body>
+</html>

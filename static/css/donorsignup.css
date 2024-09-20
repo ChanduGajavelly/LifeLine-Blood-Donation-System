@@ -1,0 +1,128 @@
+/* Body and basic styles */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Form container */
+.form-container {
+    max-width: 600px;
+    margin: auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form title */
+.form-title {
+    color: #c11d1d;
+}
+
+/* Submit button */
+.submit-btn {
+    background-color: #e63946;
+    border-color: #e63946;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #d62828;
+    transform: translateY(-3px);
+}
+
+/* Loading spinner */
+.spinner-border {
+    color: #e63946;
+}
+
+/* Results section */
+.results-card {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar styles */
+.navbar-red {
+    background-color: #c11d1d;
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+    color: #fff;
+}
+
+.navbar-brand:hover, .navbar-nav .nav-link:hover {
+    color: #f8f9fa;
+}
+
+/* Hero section */
+.hero-section {
+    background-image: url('https://cdn.britannica.com/32/191732-050-5320356D/Human-red-blood-cells.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 80px 0;
+    color: white;
+    text-align: center;
+}
+
+/* Additional form styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Primary button */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+/* Donor card and table styles */
+.donor-card {
+    margin-top: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: white;
+}
+
+.donor-card .card-header {
+    background-color: #ff4d4d;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.donor-table th {
+    background-color: #f8f9fa;
+}
+
+.donor-table td, .donor-table th {
+    vertical-align: middle;
+}
+
+.badge-blood {
+    font-size: 1rem;
+    padding: 0.5em;
+}

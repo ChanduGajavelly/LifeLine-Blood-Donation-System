@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Donors</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.1.2/tailwind.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/filterdonors.css') }}" rel="stylesheet">
+    <script>
+        function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+        document.getElementById('location').innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    document.getElementById('latitude').value = latitude;
+    document.getElementById('longitude').value = longitude;
+    document.getElementById('location').innerHTML = `Latitude: ${latitude}, Longitude: ${longitude}`;
+}
+
+function showError(error) {
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            document.getElementById('location').innerHTML = "User denied the request for Geolocation.";
+            break;
+        case error.POSITION_UNAVAILABLE:
+            document.getElementById('location').innerHTML = "Location information is unavailable.";
+            break;
+        case error.TIMEOUT:
+            document.getElementById('location').innerHTML = "The request to get user location timed out.";
+            break;
+        case error.UNKNOWN_ERROR:
+            document.getElementById('location').innerHTML = "An unknown error occurred.";
+            break;
+    }
+}
+
+    </script>
+</head>
+<body>
+   
+    <div id="navbar"></div>
+    <!-- Main Container -->
+    <div class="container mt-5">
+        <!-- Get Location Button -->
+        <div class="text-center mb-4">
+            <button onclick="getLocation()" class="btn btn-custom">Get My Location</button>
+            <!-- <p id="location" class="mt-2 text-gray-600"></p> -->
+        </div>
+
+        <!-- Form Container -->
+        <div class="form-container mx-auto">
+            <h1 class="form-title text-center text-2xl font-bold mb-4">Filter Donors</h1>
+            <form action="{{ url_for('filter_donors') }}" method="post">
+                <div class="form-group">
+                    <label for="blood_group" class="font-semibold">Blood Group:</label>
+                    <select name="blood_group" id="blood_group" class="form-control">
+                        <option value="">Select</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender" class="font-semibold">Gender:</label>
+                    <select name="gender" id="gender" class="form-control">
+                        <option value="">Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="age" class="font-semibold">Age:</label>
+                    <input type="number" name="age" id="age" class="form-control" min="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="latitude" class="font-semibold">Your Latitude:</label>
+                    <input type="text" name="latitude" id="latitude" class="form-control" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="longitude" class="font-semibold">Your Longitude:</label>
+                    <input type="text" name="longitude" id="longitude" class="form-control" readonly>
+                </div>
+
+                <button type="submit" class="btn btn-custom w-100 mt-3">Filter</button>
+            </form>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results" class="mt-4" aria-live="polite">
+            {% if donors %}
+            <div class="results-card mt-5 p-4 rounded-lg shadow-lg">
+                <h3 class="text-center text-xl font-bold mb-4">Donor Details</h3>
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Name</th>
+                            <th>Weight (kg)</th>
+                            <th>Age (years)</th>
+                            <th>Gender</th>
+                            <th>Blood Group</th>
+                            <th>Phone</th>
+                            <th>Pincode</th>
+                            <th>Chronic Disease</th>
+                            <th>Latitude</th>
+                            <th>Longitude</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for donor in donors %}
+                        <tr>
+                            <td>{{ donor.name }}</td>
+                            <td>{{ donor.weight }}</td>
+                            <td>{{ donor.age }}</td>
+                            <td>{{ donor.gender }}</td>
+                            <td>{{ donor.blood_group }}</td>
+                            <td>{{ donor.phone }}</td>
+                            <td>{{ donor.pincode }}</td>
+                            <td>{{ donor.chronic_disease }}</td>
+                            <td>{{ donor.latitude }}</td>
+                            <td>{{ donor.longitude }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% elif message %}
+            <div class="alert alert-warning mt-3" role="alert">
+                {{ message }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+</body>
+</html>

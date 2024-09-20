@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donor SignUp</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/donorsignup.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div id="navbar"></div>
+    <div class="container">
+        <div id="results" class="mt-4">
+            {% if donor %}
+                <!-- Donor Card -->
+                <div class="card donor-card">
+                    <div class="card-header">
+                        <h4 class="mb-0">Donor Details</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Personal Information Column -->
+                            <div class="col-md-6">
+                                <h5 class="card-title">Personal Information</h5>
+                                <table class="table table-bordered table-striped donor-table mt-3">
+                                    <tbody>
+                                        <tr>
+                                            <th>Name</th>
+                                            <td>{{ donor['name'] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Age</th>
+                                            <td>{{ donor['age'] }} years</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Gender</th>
+                                            <td>
+                                                {{ donor['gender'] }}
+                                                {% if donor['gender'] == 'Male' %}
+                                                    <i class="ml-2 fa fa-mars text-primary"></i>
+                                                {% elif donor['gender'] == 'Female' %}
+                                                    <i class="ml-2 fa fa-venus text-danger"></i>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Weight</th>
+                                            <td>{{ donor['weight'] }} kg</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Phone</th>
+                                            <td>{{ donor['phone'] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Pincode</th>
+                                            <td>{{ donor['pincode'] }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- Medical Information Column -->
+                            <div class="col-md-6">
+                                <h5 class="card-title">Medical Information</h5>
+                                <table class="table table-bordered table-striped donor-table mt-3">
+                                    <tbody>
+                                        <tr>
+                                            <th>Blood Group</th>
+                                            <td>
+                                                <span class="badge badge-pill badge-light badge-blood">{{ donor['blood_group'] }}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Chronic Disease</th>
+                                            <td>{{ donor['chronic_disease'] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Location</th>
+                                            <td>
+                                                Latitude: {{ donor['latitude'] }}<br>
+                                                Longitude: {{ donor['longitude'] }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% elif message %}
+                <div class="alert alert-warning" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- External JS Files -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/donorsignup.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

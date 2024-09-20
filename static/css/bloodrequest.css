@@ -1,0 +1,47 @@
+/* General body styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #fff;
+}
+
+/* Navbar custom styles */
+.navbar {
+    background-color: #c11d1d;
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+    color: #fff !important;
+}
+
+/* Add hover effect to navbar items */
+.navbar-brand:hover, .navbar-nav .nav-link:hover {
+    color: #f1f1f1 !important;
+}
+
+/* Custom Card Styles */
+.admin-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 0;
+    border-radius: 1rem;
+}
+
+.admin-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Tailwind utility classes for margins, paddings, etc. */
+.card-header-bg {
+    background-color: #e63946; /* Lighter shade of red */
+}
+
+.admin-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid #ffffff;
+    object-fit: cover;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
